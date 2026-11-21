@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="#321b49" name="theme-color"/>
+    <title>
+      Love Adventure &mdash; Birthday Quest
+    </title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=Caveat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div aria-hidden="true" id="sky">
+    </div>
+    <canvas aria-hidden="true" id="confetti">
+    </canvas>
+    <button aria-label="Nyalakan musik" class="music" hidden="" id="music">
+      🔇
+    </button>
+    <audio id="bgm" loop="" src="musik/lagu.mp3">
+    </audio>
+    <main class="game-shell">
+      <header class="game-header">
+        <div class="brand">
+          ♡ LOVE ADVENTURE
+        </div>
+        <div class="quest-label" id="quest-label">
+          PETUALANGAN ULANG TAHUN
+        </div>
+        <div class="progress-track">
+          <div id="overall-progress">
+          </div>
+        </div>
+        <div class="progress-caption">
+          <span id="stage-caption">
+            Persiapan petualangan
+          </span>
+          <span id="progress-count">
+            0 / 6 misi
+          </span>
+        </div>
+      </header>
+      <section class="screen on" id="s-start">
+        <div class="hero-art">
+          <span class="orbit orbit-one">
+            ✦
+          </span>
+          <span class="orbit orbit-two">
+            ♡
+          </span>
+          <span class="hero-heart">
+            💝
+          </span>
+          <span class="hero-spark">
+            ✨
+          </span>
+        </div>
+        <p class="eyebrow">
+          A LITTLE ADVENTURE FOR YOU
+        </p>
+        <h1 class="shine" id="t-title">
+        </h1>
+        <p class="intro" id="t-sub">
+        </p>
+        <div class="mission-preview">
+          <span>
+            🗺️ 5 level
+          </span>
+          <span>
+            🪙 koin cinta
+          </span>
+          <span>
+            🎁 1 surprise
+          </span>
+        </div>
+        <button class="btn primary" id="btn-start">
+          Mulai petualangan
+          <span>
+            ➜
+          </span>
+        </button>
+        <p class="tiny-note">
+          Dibuat khusus untuk seseorang yang spesial ♡
+        </p>
+      </section>
+      <section class="screen" id="s-story">
+        <div class="level-top">
+          <span class="level-pill">
+            LEVEL 1
+          </span>
+          <span class="level-name">
+            OUR STORY 📖
+          </span>
+        </div>
+        <h2>
+          Bab kecil dari cerita kita
+        </h2>
+        <p class="muted">
+          Baca setiap kenangan sampai selesai untuk membuka jalan ke misi berikutnya.
+        </p>
+        <figure class="pol" id="pol">
+          <div class="pic" id="pic">
+          </div>
+          <figcaption>
+            <b id="cap-t">
+            </b>
+            <span id="cap-x">
+            </span>
+          </figcaption>
+        </figure>
+        <div class="story-footer">
+          <div class="dots" id="dots">
+          </div>
+          <span id="story-count">
+            Kenangan 1
+          </span>
+        </div>
+        <div class="row">
+          <button aria-label="Sebelumnya" class="btn secondary" id="prev">
+            &larr;
+          </button>
+          <button class="btn primary" id="next">
+            Kenangan berikutnya ➜
+          </button>
+        </div>
+      </section>
+      <section class="screen" id="s-explore">
+        <div class="level-top">
+          <span class="level-pill">
+            LEVEL 2
+          </span>
+          <span class="level-name">
+            HEARTBOUND FOREST 🗺️
+          </span>
+        </div>
+        <h2>
+          Jelajahi hutan kenangan!
+        </h2>
+        <p class="muted">
+          Gerakkan karakter menuju portal. Kumpulkan 5 hati di sepanjang jalan dan hindari semak-semak.
+        </p>
+        <div class="explore-hud">
+          <span>
+            💗 Hati:
+            <b id="explore-hearts">
+              0 / 5
+            </b>
+          </span>
+          <span>
+            🪙 Koin:
+            <b id="coin-count">
+              0
+            </b>
+          </span>
+          <span>
+            👣 Langkah:
+            <b id="step-count">
+              0
+            </b>
+          </span>
+        </div>
+        <div aria-label="Peta hutan kenangan" class="adventure-map" id="adventure-map" role="grid">
+        </div>
+        <p aria-live="polite" class="fb" id="explore-message">
+          Gunakan tombol panah atau WASD untuk bergerak.
+        </p>
+        <div aria-label="Kontrol gerakan" class="movement-pad">
+          <button aria-label="Bergerak ke atas" class="move-up" data-move="up">
+            ▲
+          </button>
+          <button aria-label="Bergerak ke kiri" data-move="left">
+            ◀
+          </button>
+          <button aria-label="Bergerak ke bawah" data-move="down">
+            ▼
+          </button>
+          <button aria-label="Bergerak ke kanan" data-move="right">
+            ▶
+          </button>
+        </div>
+        <button class="btn primary" hidden="" id="explore-next">
+          Lanjut ke tantangan kenangan ➜
+        </button>
+      </section>
+      <section class="screen" id="s-quiz">
+        <div class="level-top">
+          <span class="level-pill">
+            BONUS MISSION
+          </span>
+          <span class="level-name">
+            HOW WELL DO YOU KNOW US? 💌
+          </span>
+        </div>
+        <div class="mission-card">
+          <span class="mission-icon">
+            🗝️
+          </span>
+          <div>
+            <b>
+              Misi pembuka
+            </b>
+            <p>
+              Jawab pertanyaan tentang cerita kalian untuk mendapatkan kunci menuju level berikutnya.
+            </p>
+          </div>
+        </div>
+        <div class="quiz-meta">
+          <span id="quiz-number">
+            Pertanyaan 1/4
+          </span>
+          <span id="quiz-score">
+            Kunci: 0
+          </span>
+        </div>
+        <div class="bar">
+          <i id="bar">
+          </i>
+        </div>
+        <div class="hearts" id="hearts">
+        </div>
+        <h2 id="q">
+        </h2>
+        <div class="opts" id="opts">
+        </div>
+        <p aria-live="polite" class="fb" id="fb">
+        </p>
+        <button class="btn primary" hidden="" id="btn-next">
+          Lanjutkan misi ➜
+        </button>
+      </section>
+      <section class="screen" id="s-game">
+        <div class="level-top">
+          <span class="level-pill">
+            LEVEL 3
+          </span>
+          <span class="level-name">
+            CATCH MY LOVE 💗
+          </span>
+        </div>
+        <h2>
+          Tangkap hati yang berjatuhan!
+        </h2>
+        <p class="muted">
+          Klik atau sentuh hati sebelum hilang. Kumpulkan target untuk membuka level selanjutnya.
+        </p>
+        <div class="stat-grid">
+          <div class="stat">
+            <span>
+              💗
+            </span>
+            <b id="catch-score">
+              0 / 12
+            </b>
+            <small>
+              Hati terkumpul
+            </small>
+          </div>
+          <div class="stat">
+            <span>
+              ⏱️
+            </span>
+            <b id="catch-time">
+              25 dtk
+            </b>
+            <small>
+              Sisa waktu
+            </small>
+          </div>
+        </div>
+        <div class="arena-wrap">
+          <div id="arena">
+            <div class="arena-hint" id="arena-hint">
+              Siap? Hati akan mulai jatuh&hellip;
+            </div>
+          </div>
+        </div>
+        <p aria-live="polite" class="fb" id="gstat">
+          Tekan tombol mulai untuk menjalankan misi.
+        </p>
+        <button class="btn primary" id="btn-catch-start">
+          Mulai misi ▶
+        </button>
+        <button class="btn primary" hidden="" id="gnext">
+          Level berikutnya ➜
+        </button>
+      </section>
+      <section class="screen" id="s-memory">
+        <div class="level-top">
+          <span class="level-pill">
+            LEVEL 4
+          </span>
+          <span class="level-name">
+            MEMORY CHALLENGE 🧩
+          </span>
+        </div>
+        <h2>
+          Temukan semua pasangan!
+        </h2>
+        <p class="muted">
+          Buka dua kartu setiap giliran. Ingat posisi simbolnya dan temukan semua pasangan.
+        </p>
+        <div class="memory-stats">
+          <span>
+            Pasangan
+            <b id="pairs-found">
+              0 / 6
+            </b>
+          </span>
+          <span>
+            Percobaan
+            <b id="memory-moves">
+              0
+            </b>
+          </span>
+        </div>
+        <div class="memory-grid" id="memory-grid">
+        </div>
+        <p aria-live="polite" class="fb" id="memory-msg">
+          Cari enam pasangan untuk menyelesaikan level.
+        </p>
+        <button class="btn primary" hidden="" id="memory-next">
+          Lanjut ke misi rahasia ➜
+        </button>
+      </section>
+      <section class="screen" id="s-gift">
+        <div class="level-top">
+          <span class="level-pill">
+            LEVEL 5
+          </span>
+          <span class="level-name">
+            THE SECRET GIFT 🔐
+          </span>
+        </div>
+        <h2>
+          Temukan kunci hadiah rahasia
+        </h2>
+        <p class="muted">
+          Ada tiga peti. Pilih satu untuk menemukan petunjuk. Kamu boleh mencoba lagi sampai menemukan kuncinya!
+        </p>
+        <div class="treasure-grid" id="treasure-grid">
+        </div>
+        <div class="clue-box" id="giftmsg">
+          Petunjuk pertama: hadiah terbaik bukan selalu benda yang mahal. 💌
+        </div>
+        <div class="mission-status" id="treasure-status">
+          Misi: temukan kunci 🔑
+        </div>
+        <button class="btn primary" hidden="" id="btn-cake">
+          Buka gerbang terakhir ➜
+        </button>
+      </section>
+      <section class="screen" id="s-cake">
+        <div class="level-top">
+          <span class="level-pill final-pill">
+            FINAL LEVEL &middot; 6
+          </span>
+          <span class="level-name">
+            BIRTHDAY SURPRISE 🎂
+          </span>
+        </div>
+        <p class="eyebrow">
+          YOU MADE IT TO THE END
+        </p>
+        <h2 id="cake-t">
+          Sekarang, buat satu permohonan 🌠
+        </h2>
+        <p class="muted">
+          Tarik napas, pejamkan mata sebentar, lalu tiup lilinnya.
+        </p>
+        <div class="cake-scene">
+          <div class="cake" id="cake">
+            <div class="candles">
+              <i>
+              </i>
+              <i>
+              </i>
+              <i>
+              </i>
+            </div>
+            <span>
+              🎂
+            </span>
+          </div>
+          <div class="cake-stars">
+            ✦　♡　✦
+          </div>
+        </div>
+        <div class="achievement">
+          <span>
+            🏆
+          </span>
+          <div>
+            <b>
+              Quest completed!
+            </b>
+            <small>
+              Kamu berhasil melewati semua misi.
+            </small>
+          </div>
+        </div>
+        <button class="btn primary" id="blow">
+          Tiup lilinnya 💨
+        </button>
+        <button class="btn primary" hidden="" id="btn-letter">
+          Buka surat terakhir 💌
+        </button>
+      </section>
+      <section class="screen" id="s-end">
+        <div class="ending-burst">
+          💌
+        </div>
+        <p class="eyebrow">
+          THE MOST IMPORTANT REWARD
+        </p>
+        <h1 id="e-title">
+        </h1>
+        <div class="letter" id="e-letter">
+        </div>
+        <button class="btn secondary" id="btn-reasons">
+          Buka 3 alasan aku sayang kamu 💗
+        </button>
+        <div class="love-reasons" id="love-reasons">
+        </div>
+        <div class="ending-stamp">
+          MADE WITH LOVE ♡
+        </div>
+        <button class="btn primary" id="btn-again">
+          Main lagi &orarr;
+        </button>
+      </section>
+    </main>
+    <script src="script.js">
+    </script>
+  </body>
+</html>
+
